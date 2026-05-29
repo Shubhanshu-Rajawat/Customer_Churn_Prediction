@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
-import pickel 
+import pickle
 import os
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,11 +12,11 @@ data_path = os.path.join(base_dir, "data", "WA_Fn-UseC_-Telco-Customer-Churn.csv
 df = pd.read_csv(data_path)
 
 #Step 1: Drop CustomerID (Useless columns)
-df.drop("CustomerID", axis=1, inplace=True)
+df.drop("customerID", axis=1, inplace=True)
 
 #Step 2: TotalCharges fix
 df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
-df["TotalCharges"].fillna(df["TotalCharges"].median(), inplace=True)
+df["TotalCharges"]= df["TotalCharges"].fillna(df["TotalCharges"].median())
 
 #Step 3: Encode Target column
 df["Churn"] = df["Churn"].map({"Yes": 1, "No": 0})
